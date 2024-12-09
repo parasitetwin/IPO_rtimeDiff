@@ -510,7 +510,8 @@ retcorGroup <- function(xset, parameters, exp_index=1) {
                gapExtend      = parameters$gapExtend[exp_index],
                factorDiag     = parameters$factorDiag[exp_index],
                factorGap      = parameters$factorGap[exp_index], 
-               localAlignment = parameters$localAlignment[exp_index])
+               localAlignment = parameters$localAlignment[exp_index],
+	       rtimeDifferenceThreshold = 50)
       )  	
     
     if(!is.numeric(retcor_failed)) {
