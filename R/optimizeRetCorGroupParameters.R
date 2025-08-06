@@ -211,7 +211,7 @@ optimizeRetGroup <-
         
     retcor_result <-
       retGroupCalcExperimentsCluster(params = params,
-                                     xset = xcmsset,
+                                     xset = xset,
                                      nSlaves = nSlaves)  
     retcor_result <-
       retGroupExperimentStatistic(
@@ -219,7 +219,7 @@ optimizeRetGroup <-
         subdir = subdir,
         plot = plot,
         iterator = iterator,
-        xset = xcmsset
+        xset = xset
       )
     
     history[[iterator]] <- retcor_result 
@@ -562,6 +562,7 @@ retcorGroup <- function(xset, parameters, exp_index=1) {
   
   return(list(xset = xset, retcor_failed = retcor_failed))
 }
+
 
 
 
