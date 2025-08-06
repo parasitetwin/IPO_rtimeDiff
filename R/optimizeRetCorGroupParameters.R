@@ -193,7 +193,7 @@ optimizeRetGroup <-
       dir.create(subdir)
 	
   if(is.null(params$center))
-    params$center <- getDefaultRetCorCenterSample(xset) 
+    params$center <- getDefaultRetCorCenterSample(xcmsset) 
 
   checkRetGroupSetParams(params)	
   
@@ -211,7 +211,7 @@ optimizeRetGroup <-
         
     retcor_result <-
       retGroupCalcExperimentsCluster(params = params,
-                                     xset = xset,
+                                     xset = xcmsset,
                                      nSlaves = nSlaves)  
     retcor_result <-
       retGroupExperimentStatistic(
@@ -219,7 +219,7 @@ optimizeRetGroup <-
         subdir = subdir,
         plot = plot,
         iterator = iterator,
-        xset = xset
+        xset = xcmsset
       )
     
     history[[iterator]] <- retcor_result 
@@ -562,6 +562,7 @@ retcorGroup <- function(xset, parameters, exp_index=1) {
   
   return(list(xset = xset, retcor_failed = retcor_failed))
 }
+
 
 
 
