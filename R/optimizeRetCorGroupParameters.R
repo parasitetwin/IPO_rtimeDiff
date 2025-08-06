@@ -540,9 +540,9 @@ retcorGroup <- function(xset, parameters, exp_index=1) {
       sampleGroups 	= xset@phenoData@data$sample_group,
       binSize 		= parameters$mzwid[exp_index],
       bw      		= parameters$bw[exp_index],
-      minfrac 		= parameters$minfrac[exp_index],
-      minsamp 		= parameters$minsamp[exp_index], 
-      max     = parameters$max[exp_index])
+      minFraction 		= parameters$minfrac[exp_index],
+      minSamples 		= parameters$minsamp[exp_index], 
+      maxFeatures     = parameters$max[exp_index])
 	
   try(
    xset <- groupChromPeaks(xset, param = pdp_pregroup)	    
@@ -562,6 +562,7 @@ retcorGroup <- function(xset, parameters, exp_index=1) {
   
   return(list(xset = xset, retcor_failed = retcor_failed))
 }
+
 
 
 
