@@ -177,7 +177,8 @@ getRGTVValues <- function(xset, exp_index=1, retcor_penalty=1) {
 
 
 optimizeRetGroup <- 
-  function(xset, 
+  function(xset,
+	   xcmsset,
            params = getDefaultRetGroupStartingParams(), 
            nSlaves = 4, 
            subdir = "IPO",
@@ -561,6 +562,7 @@ retcorGroup <- function(xset, parameters, exp_index=1) {
   
   return(list(xset = xset, retcor_failed = retcor_failed))
 }
+
 
 
 
