@@ -503,7 +503,7 @@ retcorGroup <- function(xset, parameters, exp_index=1) {
 	    response			= parameters$response[exp_index],
 	    gapInit			= parameters$gapInit[exp_index],
 	    gapExtend			= parameters$gapExtend[exp_index],
-	    distFunc   			= parameters$distFunc[exp_index],
+	    #distFunc   			= parameters$distFunc[exp_index],
 	    factorDiag		     	= parameters$factorDiag[exp_index],
 	    factorGap     		= parameters$factorGap[exp_index],
 	    localAlignment 		= parameters$localAlignment[exp_index],
@@ -561,6 +561,7 @@ retcorGroup <- function(xset, parameters, exp_index=1) {
   
   return(list(xset = xset, retcor_failed = retcor_failed))
 }
+
 
 
 
