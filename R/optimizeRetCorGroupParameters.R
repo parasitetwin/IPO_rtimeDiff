@@ -498,21 +498,32 @@ retcorGroup <- function(xset, parameters, exp_index=1) {
   
   if(parameters$retcorMethod[exp_index] == "obiwarp") {
     try(
-      retcor_failed <- 
-        xcms::retcor(xset, 
-               method         = "obiwarp", 
-               plottype       = parameters$plottype[exp_index], 
-               distFunc       = parameters$distFunc[exp_index],
-               profStep       = parameters$profStep[exp_index], 
-               center         = parameters$center[exp_index], 
-               response       = parameters$response[exp_index], 
-               gapInit        = parameters$gapInit[exp_index], 
-               gapExtend      = parameters$gapExtend[exp_index],
-               factorDiag     = parameters$factorDiag[exp_index],
-               factorGap      = parameters$factorGap[exp_index], 
-               localAlignment = parameters$localAlignment[exp_index],
-	       rtimeDifferenceThreshold = 50)
-      )  	
+      pgp <- ObiwarpParam(binSize		= parameters$profStep[exp_index],
+		    centerSample		= parameters$center[exp_index],
+                    response			= parameters$response[exp_index],
+                    gapInit			= parameters$gapInit[exp_index],
+                    gapExtend			= parameters$gapExtend[exp_index],
+		    distFunc   			= parameters$distFunc[exp_index],
+		    factorDiag		     	= parameters$factorDiag[exp_index],
+		    factorGap     		= parameters$factorGap[exp_index],
+		    localAlignment 		= parameters$localAlignment[exp_index],
+                    rtimeDifferenceThreshold 	= 50)
+      retcor_failed <- adjustRtime(xset, param=pgp)
+	
+        #xcms::retcor(xset, 
+        #       method         = "obiwarp", 
+        #       plottype       = parameters$plottype[exp_index], 
+        #       distFunc       = parameters$distFunc[exp_index],#
+        #       profStep       = parameters$profStep[exp_index], #
+        #       center         = parameters$center[exp_index], #
+        #       response       = parameters$response[exp_index], #
+        #       gapInit        = parameters$gapInit[exp_index], #
+        #       gapExtend      = parameters$gapExtend[exp_index], #
+        #       factorDiag     = parameters$factorDiag[exp_index],
+        #       factorGap      = parameters$factorGap[exp_index], 
+        #       localAlignment = parameters$localAlignment[exp_index],
+	#       rtimeDifferenceThreshold = 50)
+      #)  	
     
     if(!is.numeric(retcor_failed)) {
       xset <- retcor_failed
@@ -521,18 +532,30 @@ retcorGroup <- function(xset, parameters, exp_index=1) {
   } 
   
   try(
-    xset <- xcms::group(
-      xset, 
-      method  = "density", 
-      bw      = parameters$bw[exp_index], 
-      mzwid   = parameters$mzwid[exp_index], 
-      minfrac = parameters$minfrac[exp_index], 
-      minsamp = parameters$minsamp[exp_index], 
-      max     = parameters$max[exp_index])
+    pdp_pregroup <- PeakDensityParam(
+	    sampleGroups 	= xset@phenoData@data$sample_group,
+	    binSize 		= parameters$mzwid[exp_index],
+	    bw      		= parameters$bw[exp_index],
+	    minfrac 		= parameters$minfrac[exp_index],
+	    minsamp 		= parameters$minsamp[exp_index], 
+	    max     = parameters$max[exp_index])
+
+   xset <- groupChromPeaks(xset, param = pdp_pregroup)
+	    
     )
+    #xset <- xcms::group(
+    #  xset, 
+    #  method  = "density", 
+    #  bw      = parameters$bw[exp_index], 
+    #  mzwid   = parameters$mzwid[exp_index], 
+    #  minfrac = parameters$minfrac[exp_index], 
+    #  minsamp = parameters$minsamp[exp_index], 
+    #  max     = parameters$max[exp_index])
+)
   
   
   return(list(xset = xset, retcor_failed = retcor_failed))
 }
+
 
 
