@@ -509,6 +509,7 @@ retcorGroup <- function(xset, parameters, exp_index=1) {
 		    localAlignment 		= parameters$localAlignment[exp_index],
                     rtimeDifferenceThreshold 	= 50)
       retcor_failed <- adjustRtime(xset, param=pgp)
+    )
 	
         #xcms::retcor(xset, 
         #       method         = "obiwarp", 
@@ -542,7 +543,7 @@ retcorGroup <- function(xset, parameters, exp_index=1) {
 
    xset <- groupChromPeaks(xset, param = pdp_pregroup)
 	    
-    )
+  )
     #xset <- xcms::group(
     #  xset, 
     #  method  = "density", 
@@ -551,11 +552,12 @@ retcorGroup <- function(xset, parameters, exp_index=1) {
     #  minfrac = parameters$minfrac[exp_index], 
     #  minsamp = parameters$minsamp[exp_index], 
     #  max     = parameters$max[exp_index])
-)
+    #)
   
   
   return(list(xset = xset, retcor_failed = retcor_failed))
 }
+
 
 
 
