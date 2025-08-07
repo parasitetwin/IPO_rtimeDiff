@@ -509,10 +509,14 @@ retcorGroup <- function(xset, parameters, exp_index=1) {
 	    factorGap     		= parameters$factorGap[exp_index],
 	    #localAlignment 		= parameters$localAlignment[exp_index],
 	    rtimeDifferenceThreshold 	= 50)
+    
+    message("Here")
 	  
     try(
       retcor_failed <- adjustRtime(xset, param=pgp)
     )
+
+    message("Here2")
 	
         #xcms::retcor(xset, 
         #       method         = "obiwarp", 
@@ -562,6 +566,7 @@ retcorGroup <- function(xset, parameters, exp_index=1) {
   
   return(list(xset = xset, retcor_failed = retcor_failed))
 }
+
 
 
 
