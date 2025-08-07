@@ -541,7 +541,7 @@ retcorGroup <- function(xset, parameters, exp_index=1) {
   
   
   pdp_pregroup <- PeakDensityParam(
-      sampleGroups 	= xset@phenoData@data$sample_group,
+      sampleGroups 	= rep("sQC", nrow(xset@phenoData@data)),
       binSize 		= parameters$mzwid[exp_index],
       bw      		= parameters$bw[exp_index],
       minFraction 		= parameters$minfrac[exp_index],
@@ -566,6 +566,7 @@ retcorGroup <- function(xset, parameters, exp_index=1) {
   
   return(list(xset = xset, retcor_failed = retcor_failed))
 }
+
 
 
 
