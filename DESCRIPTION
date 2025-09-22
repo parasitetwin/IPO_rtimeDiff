@@ -1,4 +1,4 @@
-Package: IPO_xcms4
+Package: IPO
 Type: Package
 Title: Automated Optimization of XCMS Data Processing parameters
 Version: 1.0.0
